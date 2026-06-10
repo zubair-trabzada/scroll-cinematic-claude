@@ -1,0 +1,109 @@
+# 🎬 Scroll-Cinematic — 3D Scroll Websites for Claude Code
+
+Build **award-winning "3D scroll" websites from ONE prompt** — for any product, portfolio,
+contractor, restaurant, agency, or brand.
+
+Claude Code + the **Higgsfield MCP** generate a cinematic hero shot and 3D clips
+(360° spins, fly-throughs, explosions, reveals), slice them into scroll-scrubbed frames,
+build a polished branded multi-section site with buttery smooth scrolling, and launch it
+on localhost — all from a single prompt.
+
+> The viral "3D scroll" effect (Apple product pages, Awwwards sites) isn't Three.js —
+> it's a **canvas image-sequence scrub**. This skill automates the entire pipeline.
+
+---
+
+## ⚡ Install (one command)
+
+```bash
+mkdir -p ~/.claude/skills && git clone https://github.com/zubair-trabzada/scroll-cinematic-claude.git ~/.claude/skills/scroll-cinematic
+```
+
+Then **restart Claude Code** so it picks up the skill. That's it.
+
+> Already installed? Update with:
+> ```bash
+> cd ~/.claude/skills/scroll-cinematic && git pull
+> ```
+
+---
+
+## ✅ Requirements
+
+| What | Why | How |
+|---|---|---|
+| **Claude Code** | runs the skill | [claude.com/code](https://claude.com/code) |
+| **Higgsfield MCP** + credits | generates the images & 3D clips (~$1–2/site) | in Claude Code: `/mcp` → Add server → paste your Higgsfield MCP link |
+| ~~ffmpeg~~ | ~~slices clips into frames~~ | **auto-installed by the skill** — nothing to do |
+
+Check the MCP is connected: type `/mcp` in Claude Code → `higgsfield` should be green.
+
+---
+
+## 🚀 Use it (the one prompt)
+
+Open a **new Claude Code session** and paste — swap the bracket for anything:
+
+```
+Use the scroll-cinematic skill to build a 3D scroll website for [WHATEVER IT IS].
+Generate a high-end cinematic hero plus two 3D clips with the Higgsfield MCP at 1080p,
+slice them into scroll frames, and build a polished, branded multi-section site that
+matches its vibe — then launch it on localhost.
+```
+
+**`[WHATEVER IT IS]` can be anything:**
+
+| Type | Examples | The 3D it gets |
+|---|---|---|
+| Products | hot sauce, smartwatch, sneaker, perfume | 360° spin + explode/reveal |
+| Local business | contractor, HVAC, med spa, law firm | building fly-through + detail reveal |
+| People | photographer portfolio, artist, coach | cinematic portrait / abstract motion |
+| Hospitality | restaurant, hotel, gym, listing | dish 360° / interior fly-through |
+| Companies | agency, SaaS, startup, course, event | logo morph + light-streak fly-through |
+
+Want control? Add it: *"…make it bold and colorful with a powder explosion"* or
+*"…dark and luxe with a slow fly-through."* Leave it out and Claude picks what fits.
+
+⏱ A build takes ~10–15 min (AI video renders) and costs ~$1–2 in Higgsfield credits.
+
+---
+
+## 📦 What's inside
+
+```
+scroll-cinematic/
+├── SKILL.md                      # the full one-prompt pipeline Claude follows
+├── scripts/
+│   ├── ensure-ffmpeg.sh          # auto-installs ffmpeg (no Homebrew needed)
+│   ├── extract-frames.sh         # video → numbered scroll frames
+│   └── compress-frames.sh        # crisp + fast-loading frames
+└── templates/
+    ├── index.html / styles.css / scroll-cinematic.js   # multi-section scrub engine (Lenis)
+    ├── CinematicReveal.tsx       # React/Next.js drop-in (optional)
+    └── Launch Demo.command       # double-click localhost launcher (great for demos)
+```
+
+## 🔧 How it works (60 seconds)
+
+1. **Hero image** — Higgsfield `nano_banana_pro` generates a crisp cinematic keyframe.
+2. **3D clips** — Higgsfield `seedance_2_0` animates it (360° spin, fly-through, explosion…) at 1080p.
+3. **Frames** — ffmpeg slices each clip into ~180 JPGs.
+4. **Scrub engine** — a `<canvas>` draws the frame matching your scroll position; Lenis makes
+   the scroll buttery. Scroll forward/back = play the cinematic forward/back.
+5. **Site** — branded sections (copy, stats, cards, CTA) reveal as you scroll. Launches on localhost.
+
+## ❓ Troubleshooting
+
+- **"Skill not found"** → restart Claude Code after installing; check `ls ~/.claude/skills/scroll-cinematic/SKILL.md`.
+- **Higgsfield clip flagged/failed** → normal occasionally; Claude retries automatically (failures are refunded).
+- **Site loads slowly** → frames too large; the skill compresses to 1600px/q88 by default — keep it.
+- **Want a public URL?** → the site is a static folder; drop it on Netlify/Vercel/Railway as-is.
+
+---
+
+## 🎓 Learn to sell this
+
+Want the full system — client outreach, pricing, and the business playbook around these
+builds? Join the **AI Workshop** community on Skool.
+
+*Built by [Zubair Trabzada](https://github.com/zubair-trabzada) — AI Workshop.*

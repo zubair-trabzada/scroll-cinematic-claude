@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I AM INEVITABLE — Scroll Cinematic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Fixed HUD chrome -->
+  <nav class="hud">
+    <span class="hud-brand">STARK<span class="dim">/</span>INDUSTRIES</span>
+    <span class="hud-mid">ARC REACTOR · ONLINE</span>
+    <span class="hud-right">MARK LXXXV</span>
+  </nav>
+
+  <!-- The cinematic scroll section -->
+  <section class="cinematic" id="cinematic">
+    <div class="sticky">
+      <canvas id="frame-canvas"></canvas>
+      <div class="vignette"></div>
+
+      <!-- Scroll-driven overlay copy -->
+      <div class="overlay">
+        <h1 class="line" data-in="0.00" data-out="0.30">I AM IRON MAN.</h1>
+        <h1 class="line" data-in="0.34" data-out="0.64">BUILD WITH DEVINI.</h1>
+        <h1 class="line" data-in="0.70" data-out="1.00">I AM INEVITABLE.</h1>
+      </div>
+
+      <!-- corner telemetry -->
+      <div class="telemetry tl">PWR <b id="pwr">100%</b></div>
+      <div class="telemetry tr">SYS NOMINAL</div>
+      <div class="telemetry bl" id="frame-readout">FRAME 000 / 000</div>
+      <div class="telemetry br">ALT 12,400 FT</div>
+
+      <!-- progress bar -->
+      <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="scroll-hint" id="scroll-hint">SCROLL ▾</div>
+    </div>
+  </section>
+
+  <!-- A closing panel so there's somewhere to land -->
+  <section class="outro">
+    <h2>SYSTEMS NOMINAL</h2>
+    <p>Built with a scroll-scrubbed canvas frame sequence + Lenis smooth scroll.<br/>
+       Swap the <code>/frames</code> folder to re-theme. The technique is yours.</p>
+  </section>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
+  <script src="scroll-cinematic.js"></script>
+</body>
+</html>

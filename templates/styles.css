@@ -1,0 +1,166 @@
+:root {
+  --ink: #f4f6fb;
+  --bg: #05070d;
+  --accent: #ff3b30;     /* arc-reactor red */
+  --accent-2: #38bdf8;   /* HUD cyan */
+  --gold: #ffb443;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Rajdhani", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ---------- Fixed HUD ---------- */
+.hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 28px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  color: rgba(244, 246, 251, 0.7);
+  mix-blend-mode: difference;
+}
+.hud-brand .dim { color: var(--accent); margin: 0 2px; }
+.hud-mid { color: var(--accent-2); }
+
+/* ---------- Cinematic scroll section ---------- */
+.cinematic {
+  position: relative;
+  height: 500vh;            /* scroll distance = playback length */
+}
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #02030a;
+}
+#frame-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 45%, transparent 45%, rgba(0,0,0,0.65) 100%),
+    linear-gradient(180deg, rgba(0,0,0,0.45) 0%, transparent 25%, transparent 70%, rgba(0,0,0,0.7) 100%);
+}
+
+/* ---------- Overlay copy ---------- */
+.overlay {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0 24px;
+}
+.line {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  max-width: 90vw;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 8vw, 7rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  opacity: 0;
+  text-shadow: 0 0 40px rgba(255, 59, 48, 0.35);
+  will-change: opacity, transform;
+}
+.line:last-child {
+  color: var(--accent);
+  text-shadow: 0 0 60px rgba(255, 59, 48, 0.6);
+}
+
+/* ---------- Telemetry corners ---------- */
+.telemetry {
+  position: absolute;
+  z-index: 12;
+  font-family: "Orbitron", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: rgba(56, 189, 248, 0.8);
+}
+.telemetry b { color: var(--ink); }
+.tl { top: 90px; left: 28px; }
+.tr { top: 90px; right: 28px; }
+.bl { bottom: 70px; left: 28px; }
+.br { bottom: 70px; right: 28px; }
+
+/* ---------- Progress ---------- */
+.progress {
+  position: absolute;
+  left: 28px; right: 28px; bottom: 44px;
+  height: 2px;
+  background: rgba(255,255,255,0.12);
+  z-index: 12;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  box-shadow: 0 0 12px var(--accent);
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  font-family: "Orbitron", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: rgba(244,246,251,0.6);
+  animation: bob 1.8s ease-in-out infinite;
+  transition: opacity 0.4s;
+}
+@keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+/* ---------- Outro ---------- */
+.outro {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 18px;
+  padding: 40px;
+  background: radial-gradient(80% 60% at 50% 0%, rgba(255,59,48,0.08), transparent 60%), var(--bg);
+}
+.outro h2 {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  letter-spacing: 0.2em;
+  color: var(--accent-2);
+}
+.outro p { color: rgba(244,246,251,0.65); font-size: 1.1rem; line-height: 1.7; }
+.outro code { color: var(--gold); font-family: "Orbitron", monospace; }
+
+/* ---------- Mobile polish ---------- */
+@media (max-width: 600px) {
+  .hud { padding: 14px 16px; font-size: 10px; letter-spacing: 0.18em; }
+  .hud-mid { display: none; }              /* avoid 3-label overlap on narrow screens */
+  .telemetry { font-size: 9px; letter-spacing: 0.15em; }
+  .tl, .tr { top: 64px; }
+  .progress { left: 16px; right: 16px; }
+}
